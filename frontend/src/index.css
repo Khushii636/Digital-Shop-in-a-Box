@@ -1,0 +1,23 @@
+@import "tailwindcss";
+
+@theme {
+  /* Brand colors from Design.md */
+  --color-primary: #245C4A;
+  --color-primary-light: #DDEFE7;
+  --color-accent: #F2B84B;
+  --color-background: #F7F5EF;
+  --color-card: #FFFDF8;
+  --color-text-primary: #18231F;
+  --color-text-muted: #718078;
+  --color-danger: #D96B5F;
+  --color-success: #4E9B72;
+  
+  /* Typography from Design.md */
+  --font-sans: "Plus Jakarta Sans", sans-serif;
+}
+
+body {
+  background-color: var(--color-background);
+  color: var(--color-text-primary);
+  font-family: var(--font-sans);
+}
