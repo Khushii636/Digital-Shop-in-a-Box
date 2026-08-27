@@ -1,11 +1,10 @@
 import { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, Navigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
-
 
 function Home() {
   const [backendStatus, setBackendStatus] = useState('Checking connection...')
-  const { logout } = useAuth()
+  const { isAuthenticated, logout } = useAuth()
 
   useEffect(() => {
     fetch('http://localhost:8000/api/health/')
@@ -14,41 +13,42 @@ function Home() {
       .catch(() => setBackendStatus('Backend disconnected ⚠️'))
   }, [])
 
+  // Redirect to /dashboard if user is logged in
+  if (isAuthenticated) {
+    return <Navigate to="/dashboard" replace />
+  }
+
   return (
     <div className="min-h-screen flex flex-col items-center justify-center p-6 bg-background">
-      <div className="bg-card p-8 rounded-[20px] shadow-sm border border-black/5 max-w-md w-full text-center">
-        <div className="flex justify-end mb-2">
-          <button
-            onClick={logout}
-            className="text-xs text-danger font-semibold hover:underline cursor-pointer"
-          >
-            Logout ➔
-          </button>
-        </div>
-
-        <h1 className="text-3xl font-bold text-primary mb-2">
-          Sharma General Store
+      <div className="bg-card p-8 rounded-[20px] shadow-sm border border-black/5 max-w-md w-full text-center space-y-4">
+        <h1 className="text-3xl font-bold text-primary">
+          Digital Shop-in-a-Box
         </h1>
-        <p className="text-base text-text-muted mb-6">
-          Your digital shop is ready to be built.
+        <p className="text-base text-text-muted">
+          Your complete shop management & billing solution.
         </p>
-        <Link
-          to="/onboarding"
-          className="bg-primary text-white font-semibold py-3 px-6 rounded-xl w-full mb-3 block text-center cursor-pointer hover:opacity-90 transition-opacity"
-        >
-          ⚙️ Setup / Onboard New Shop
-        </Link>
-        <button
-          className="bg-accent text-text-primary font-semibold py-3 px-6 rounded-xl w-full mb-6 block text-center cursor-pointer hover:opacity-90 transition-opacity"
-        >
-          + New Sale
-        </button>
+
+        <div className="flex flex-col space-y-3 pt-2">
+          <Link
+            to="/login"
+            className="bg-accent text-text-primary font-semibold py-3 px-6 rounded-xl w-full text-center hover:opacity-90 transition-opacity"
+          >
+            Login to Your Shop
+          </Link>
+          <Link
+            to="/register"
+            className="bg-primary text-white font-semibold py-3 px-6 rounded-xl w-full text-center hover:opacity-90 transition-opacity"
+          >
+            Create Free Account
+          </Link>
+        </div>
 
         {/* Health Check Badge */}
-        <div className="text-sm font-medium text-success bg-primary-light py-2 px-4 rounded-lg inline-block">
-          {backendStatus}
+        <div className="pt-4">
+          <div className="text-xs font-medium text-success bg-primary-light py-2 px-4 rounded-lg inline-block">
+            {backendStatus}
+          </div>
         </div>
-
       </div>
     </div>
   )
