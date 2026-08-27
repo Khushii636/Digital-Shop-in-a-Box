@@ -3,6 +3,7 @@ import Home from './pages/Home'
 import Dashboard from './pages/Dashboard'
 import Products from './pages/Products'
 import Customers from './pages/Customers'
+import NewSale from './pages/NewSale'
 import Login from './pages/Login'
 import Register from './pages/Register'
 import Onboarding from './pages/Onboarding'
@@ -22,6 +23,14 @@ function App() {
           }
         />
         <Route
+          path="/sale"
+          element={
+            <ProtectedRoute>
+              <NewSale />
+            </ProtectedRoute>
+          }
+        />
+        <Route
           path="/products"
           element={
             <ProtectedRoute>
@@ -37,6 +46,7 @@ function App() {
             </ProtectedRoute>
           }
         />
+
 
         <Route
           path="/onboarding"

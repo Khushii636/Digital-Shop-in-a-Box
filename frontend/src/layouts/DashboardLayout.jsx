@@ -89,15 +89,17 @@ function DashboardLayout({ children, onNewSaleClick }) {
 
           {/* Prominent Floating Action Button (+ New Sale) */}
           <div className="relative -top-5 flex flex-col items-center">
-            <button
+            <Link
+              to="/sale"
               onClick={onNewSaleClick}
               className="bg-accent text-text-primary font-bold p-3.5 rounded-full shadow-lg border-4 border-background hover:scale-105 active:scale-95 transition-transform flex items-center justify-center cursor-pointer"
               title="New Sale"
             >
               <Plus className="w-6 h-6 stroke-[3]" />
-            </button>
+            </Link>
             <span className="text-[10px] font-bold text-primary mt-0.5">New Sale</span>
           </div>
+
 
           {/* Products */}
           <Link
