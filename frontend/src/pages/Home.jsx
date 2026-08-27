@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
+
 
 function Home() {
   const [backendStatus, setBackendStatus] = useState('Checking connection...')
@@ -30,6 +32,12 @@ function Home() {
         <p className="text-base text-text-muted mb-6">
           Your digital shop is ready to be built.
         </p>
+        <Link
+          to="/onboarding"
+          className="bg-primary text-white font-semibold py-3 px-6 rounded-xl w-full mb-3 block text-center cursor-pointer hover:opacity-90 transition-opacity"
+        >
+          ⚙️ Setup / Onboard New Shop
+        </Link>
         <button
           className="bg-accent text-text-primary font-semibold py-3 px-6 rounded-xl w-full mb-6 block text-center cursor-pointer hover:opacity-90 transition-opacity"
         >
@@ -40,6 +48,7 @@ function Home() {
         <div className="text-sm font-medium text-success bg-primary-light py-2 px-4 rounded-lg inline-block">
           {backendStatus}
         </div>
+
       </div>
     </div>
   )
